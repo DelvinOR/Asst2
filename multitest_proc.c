@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 #include "multitest.h"
-
+    
 int procSpookySearch(int*,int, int);
 int seachList(int*, int, int, int, int);
 
