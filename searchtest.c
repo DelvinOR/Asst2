@@ -132,7 +132,7 @@ int main(int argc, char**argv){
       		long elapsedtimes = end.tv_sec - start.tv_sec;
       		long total = elapsedtimeu + elapsedtimes*1000000;
 			if (total < 0)
-				printf("DEBUG:neg val! u:%ld s:%ld\n", elapsedtimeu, elapsedtimes);
+				//printf("DEBUG:neg val! u:%ld s:%ld\n", elapsedtimeu, elapsedtimes);
 			times[j] = total;
 			int temp = myList[index2];
 			myList[index2] = myList[index1];

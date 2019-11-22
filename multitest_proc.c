@@ -49,7 +49,7 @@ int SpookySearch(int* arr,int arrSize, int target, int groupSize){// arrSize is 
         if(WIFEXITED(status)){
             found = WEXITSTATUS(status);//get lower 8 bits from child
             if(found != 0xFF){//255 means child did not find target
-		index = i*groupSize + (int)found;//target was found
+		        index = i*groupSize + (int)found;//target was found
             }
         }
         i++;
