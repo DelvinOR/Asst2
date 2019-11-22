@@ -1,0 +1,31 @@
+We found the general trend of time vs size of list for procs and threads by testing many iterations of
+our search. We did a search for 20000, 15000, 10000, 5000, 2500, 1000, and 500 size arrays. We did each test 1000
+times for both threads and procedures. Then we plotted these times in a graph. We can see that threads always outperformed
+processes in our case.
+
+Then we looked for a tradeoff point between threads and a single proc. This one was hard to test for because of
+the large variance of procs vs the much smaller variance of threads,but from running various tests of search on different 
+sized arrays for thread and comparing them to an averaged batch of results of a proc on size 250, we saw that it takes 
+an array of about size 4,000 to achieve similar performance. Single Proc: ~200usec All Threads: ~200usec
+
+For the last question, we tested this with our current suite of tests A-N. and we could see from this data and our previous 
+data that the more threads/processes required, the more time it took across the board. We additionally tested this against 
+thread/proc group sizes of 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 15, but as these tests did not provide any useful insights 
+they were removed for sake of brevity.
+
+A final list of test suites we thought were most informative:
+Test:	Array Size:	Group Size:
+A:	10,000		10
+B:	10,000		20
+C:	10,000		50
+D:	10,000		100
+E:	10,000		250
+F:	1,000		10
+G:	1,000		20
+H:	1,000		50
+I:	1,000		100
+J:	1,000		250
+K:	100		10
+L:	100		20
+M:	100		50
+N:	100		100
