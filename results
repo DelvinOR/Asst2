@@ -1,0 +1,78 @@
+Batch 1:
+Proc
+A: Total: 2213340 Avg: 2213 StdDev: 3242.148379 Min: 1259 Max: 26831
+B: Total: 5425510 Avg: 5425 StdDev: 5080.488414 Min: 3173 Max: 31048
+C: Total: 10813541 Avg: 10813 StdDev: 7383.434808 Min: 6734 Max: 56590
+D: Total: 24815430 Avg: 24815 StdDev: 8993.873763 Min: 17262 Max: 83618
+E: Total: 49807049 Avg: 49807 StdDev: 9922.448282 Min: 36147 Max: 90996
+F: Total: 271633 Avg: 271 StdDev: 843.180264 Min: 186 Max: 15131
+G: Total: 602879 Avg: 602 StdDev: 1427.397744 Min: 354 Max: 13616
+H: Total: 1144093 Avg: 1144 StdDev: 2181.607183 Min: 642 Max: 19718
+I: Total: 2745702 Avg: 2745 StdDev: 3471.128531 Min: 1610 Max: 25127
+J: Total: 5391063 Avg: 5391 StdDev: 4893.307142 Min: 3279 Max: 31003
+K: Total: 132018 Avg: 132 StdDev: 429.930592 Min: 101 Max: 12098
+L: Total: 163769 Avg: 163 StdDev: 435.095172 Min: 125 Max: 8241
+M: Total: 331673 Avg: 331 StdDev: 881.617200 Min: 224 Max: 11833
+N: Total: 617713 Avg: 617 StdDev: 1449.254876 Min: 350 Max: 13073
+
+
+Thread:
+A: Total: 521153 Avg: 521 StdDev: 233.862252 Min: 436 Max: 4457
+B: Total: 1238844 Avg: 1238 StdDev: 48.602140 Min: 1161 Max: 1534
+C: Total: 2596911 Avg: 2596 StdDev: 94.331400 Min: 2428 Max: 3523
+D: Total: 7349759 Avg: 7349 StdDev: 283.286818 Min: 6768 Max: 9890
+E: Total: 15837699 Avg: 15837 StdDev: 301.404819 Min: 14950 Max: 18363
+F: Total: 27336 Avg: 27 StdDev: 8.379976 Min: 21 Max: 175
+G: Total: 107507 Avg: 107 StdDev: 15.983898 Min: 91 Max: 250
+H: Total: 239774 Avg: 239 StdDev: 41.199806 Min: 204 Max: 1240
+I: Total: 599744 Avg: 599 StdDev: 41.202257 Min: 544 Max: 924
+J: Total: 1239038 Avg: 1239 StdDev: 52.493276 Min: 1149 Max: 1650
+K: Total: 12890 Avg: 12 StdDev: 7.642251 Min: 10 Max: 136
+L: Total: 17426 Avg: 17 StdDev: 13.251340 Min: 12 Max: 237
+M: Total: 45366 Avg: 45 StdDev: 13.451022 Min: 34 Max: 239
+N: Total: 110637 Avg: 110 StdDev: 14.430489 Min: 91 Max: 248
+
+Batch 2:
+Proc
+A: Total: 2187112 Avg: 2187 StdDev: 3287.485604 Min: 1240 Max: 27409
+B: Total: 5389188 Avg: 5389 StdDev: 5210.984327 Min: 3100 Max: 38536
+C: Total: 10532932 Avg: 10532 StdDev: 7130.083203 Min: 6391 Max: 45328
+D: Total: 24880111 Avg: 24880 StdDev: 9607.869085 Min: 16554 Max: 74969
+E: Total: 50036110 Avg: 50036 StdDev: 10027.993260 Min: 36974 Max: 102259
+F: Total: 270458 Avg: 270 StdDev: 862.559577 Min: 185 Max: 14978
+G: Total: 602228 Avg: 602 StdDev: 1458.915473 Min: 350 Max: 13634
+H: Total: 1141341 Avg: 1141 StdDev: 2206.461962 Min: 632 Max: 21021
+I: Total: 2693311 Avg: 2693 StdDev: 3501.007157 Min: 1525 Max: 24687
+J: Total: 5400519 Avg: 5400 StdDev: 5226.571635 Min: 3168 Max: 31940
+K: Total: 135537 Avg: 135 StdDev: 476.593604 Min: 102 Max: 13692
+L: Total: 163725 Avg: 163 StdDev: 433.695567 Min: 125 Max: 7942
+M: Total: 339206 Avg: 339 StdDev: 932.687770 Min: 221 Max: 12010
+N: Total: 588655 Avg: 588 StdDev: 1427.332086 Min: 352 Max: 14152
+
+Thread
+A: Total: 485171 Avg: 485 StdDev: 128.143759 Min: 434 Max: 3961
+B: Total: 1232001 Avg: 1232 StdDev: 65.167638 Min: 1146 Max: 1801
+C: Total: 2577412 Avg: 2577 StdDev: 226.679545 Min: 2405 Max: 4134
+D: Total: 7358113 Avg: 7358 StdDev: 358.528430 Min: 6954 Max: 10095
+E: Total: 15676855 Avg: 15676 StdDev: 322.931192 Min: 15000 Max: 19159
+F: Total: 27877 Avg: 27 StdDev: 11.022477 Min: 20 Max: 184
+G: Total: 107036 Avg: 107 StdDev: 14.111201 Min: 90 Max: 263
+H: Total: 236918 Avg: 236 StdDev: 25.270536 Min: 204 Max: 428
+I: Total: 618610 Avg: 618 StdDev: 124.430221 Min: 543 Max: 2683
+J: Total: 1226380 Avg: 1226 StdDev: 48.479150 Min: 1150 Max: 1496
+K: Total: 12926 Avg: 12 StdDev: 7.514785 Min: 11 Max: 138
+L: Total: 17216 Avg: 17 StdDev: 11.053778 Min: 12 Max: 206
+M: Total: 45559 Avg: 45 StdDev: 14.236608 Min: 35 Max: 247
+N: Total: 109134 Avg: 109 StdDev: 15.223206 Min: 90 Max: 271
+
+
+
+
+
+
+
+
+
+
+
+

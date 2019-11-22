@@ -1,5 +1,7 @@
 #ifndef multitest_h
 #define multitest_h
-#define spookySearch( X ) procSpookySearch( X )
-#define spookySearch( X ) threadSpookySearch( X )
+#define Search(w,x,y,z) SpookySearch(w,x,y,z)
+#include <math.h>
+extern const char* mode;
+int SpookySearch(int*, int, int, int);
 #endif

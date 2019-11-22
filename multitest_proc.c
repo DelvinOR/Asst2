@@ -1,61 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <math.h>
+#include <sys/wait.h>
 #include "multitest.h"
-    
-int procSpookySearch(int*,int, int);
-int seachList(int*, int, int, int, int);
+ 
+int searchList(int*,int, int, int, int, int);
 
-int procSpookySearch(int* arr,int arrSize, int target){// arrSize is going to help to determin how many processes we will need including parent process
+const char * mode = "procedure\0";
+int SpookySearch(int* arr,int arrSize, int target, int groupSize){// arrSize is going to help to determin how many processes we will need including parent process
     int ulimit = 2000;
     int i;
-    int numProc = ceil(((double)arrSize/250));
-
-    int firstCheck = searchList(arr, 0, 250, arrSize, target);
-    if(firstCheck == 1){
-        return 1; //1 for found, 0 for not found *Need to confirm*
+    if (arrSize < 1){
+	printf("ERROR: arrSize too small!\n");
+	return -1;
     }
+    if (groupSize > 250){
+	groupSize = 250;
+        printf("Warning: groupSize too large! Defaulting to 250.\n");
+    }
+    int numProc = (int) ceil(((double)arrSize/groupSize));
 
     int id;
+    int ids[numProc];
     int res;
-    // Child processes will now begin here and we start with i = 1 because we allow the parent process to search the array first
-    for(i = 1; i < numProc && i < ulimit ; i++){
+    // Child processes will now begin here
+    for(i = 0; i < numProc && i < ulimit ; i++){
         id = fork();
         if(id == 0){ // We are in the child process
-            res = searchList(arr,250*i,250*(i+1), arrSize, target);
-            if(res == 1){
-                exit(1);
+            res = searchList(arr,groupSize*i,groupSize*(i+1), arrSize, target, groupSize);
+            if(res != 255){
+                exit(res);//found target
             }else{
-                exit(0);
+                exit(255);//did not find target
             }
         }
+	else{
+		ids[i] = id;
+	}
     }
 
     int status;
-    int found = 0;
-    while(numProc > 0){
-        wait(&status);
+    int index = -1;
+    unsigned char found = 0;
+    i = 0;
+    while(i < numProc){
+        waitpid(ids[i], &status, 0);
         // Status contatins the exit status
         if(WIFEXITED(status)){
-            found = WEXITSTATUS(status);
-            if(found == 1){
-                break;
+            found = WEXITSTATUS(status);//get lower 8 bits from child
+            if(found != 0xFF){//255 means child did not find target
+		index = i*groupSize + (int)found;//target was found
             }
         }
-        --numProc;
+        i++;
     }
-
-    return found;
+    //if (index == -1)
+    //	printf("Target not found!\n");
+    //else
+	//printf("Target found!\n");
+    return index;
 }
 
-int searchList(int* arr, int startIndex, int endIndex, int arrSize, int target){
+int searchList(int* arr, int startIndex, int endIndex, int arrSize, int target, int groupSize){
     int i;
     for(i = startIndex; i < endIndex && i < arrSize; i++){
         if(arr[i] == target){
-            return 1;
+            return i%groupSize;//returns index of target if found
         }
     }
 
-    return 0;
+    return 255;//returns 255 if not found
 }

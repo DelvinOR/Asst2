@@ -1,74 +1,106 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <math.h>
 #include "multitest.h"
 
-int threadSpookySearch(int*, int, int);
+//int SpookySearch(int*, int, int, int);
 
-int threadCounter = 0;
+typedef struct thread_arguments{
+	int startIndex;
+	int endIndex;
+	int grpSize;
+	//int* result;
+}t_args;
 
+
+const char * mode = "thread\0";
 int*numList;
 int sizeOfArray;
-int startIndex;
-int endIndex;
+//int startIndex;
+//int endIndex;
 int searchTarget;
 
-void * threadHelper(void * val){
-    threadCounter++;
-    // 0 false
-    // 1 true
-    int * found = (int *) val;
-    
+void * threadHelper(void * args){
+    int * arguments = (int *) args;
+    //printf("DEBUG: ARG0 Grab\n");
+    int startIndex = arguments[0];
+    //printf("DEBUG: ARG1 Grab\n");
+    int endIndex = arguments[1];
+    //printf("DEBUG: ARG2 Grab\n");
+    int groupSize = arguments[2];
+    //int * result = arguments[3];
+    int * result = malloc(sizeof(int));
+    if (result == NULL){
+	printf("DEBUG: result is null. malloc failed!\n");
+    }
+    *result = 255;
     int i;
+    int found = 255;
     for(i = startIndex; i < endIndex && i < sizeOfArray; i++){
+	//printf("DEBUG: i: %d sI: %d eI: %d sA: %d\n", i, startIndex, endIndex, sizeOfArray);
+	//printf("DEBUG: a[%d]: %d\n", i, numList[i]);
         if(numList[i] == searchTarget){
-            found[0] = 1;
+            found = i%groupSize;
+	    *result = found;
         }
     }
-
-    pthread_exit(found);
+    //printf("DEBUG: thread exit\n");
+    if (result == NULL)
+	printf("DEBUG: NULL RETVAL: %d\n", i);
+    pthread_exit(result);
 }
 
-int threadSpookySearch(int * arr, int arrSize, int target){
+int SpookySearch(int * arr, int arrSize, int target, int groupSize){
     numList = arr;
     sizeOfArray = arrSize;
-    startIndex = 0;
-    endIndex = 250;
     searchTarget = target;
 
+    if (arrSize < 1){
+	printf("ERROR: arrSize too small!\n");
+	return -1;
+    }
+    if (groupSize > 250){
+	groupSize = 250;
+        printf("Warning: groupSize too large! Defaulting to 250.\n");
+    }
     int ulimit = 2000;
     int i;
-    int numOfThreads = ceil((double)arrSize/250);
+    int numOfThreads = (int) ceil((double)arrSize/groupSize);
     pthread_t threads[numOfThreads];
 
-    //First we let the main thread search for the target in the first 250 elements of the list
-    for(i = 0; i < 250 && i < arrSize; i++){
-        if(arr[i] == target){
-            return 1;
-        }
-    }
 
     // Inside of this loop, we will create all of the threads and use our helper function.
-    // Does not make sense to pass variables on to the create thread function so what we will do is
-    // set gloabal variables for the array, starting index, ending, index, and search target.
-    int n = 0;
-    for(i = 1; i < numOfThreads && i < ulimit; i++){
-        startIndex  = 250* i;
-        endIndex = 250 *(i + 1);
-        pthread_create(&threads[i], NULL, threadHelper, &n);
+    // We pass a struct filled with the relevant search info to each thread
+    for(i = 0; i < numOfThreads && i < ulimit; i++){
+	t_args * new = malloc(sizeof(t_args));
+	new->startIndex  = groupSize * i;
+        new->endIndex = groupSize * (i + 1);
+	new->grpSize = groupSize;
+	//new->result = malloc(sizeof(int *));
+	//printf("DEBUG: Thread created!\n");
+        pthread_create(&threads[i], NULL, threadHelper, new);
     }
 
     // Waiting for the threads to finish and checking each thread's exit status
-    void* threadReturn;
-    int* res;
-    for(i = 0; i < threadCounter; i++){
+    void* threadReturn = NULL;
+    int res;
+    int index = -1;
+    //printf("DEBUG: Returning threads\n");
+    for(i = 0; i < numOfThreads; i++){
+	//printf("DEBUG: At join\n");
         pthread_join(threads[i], &threadReturn);
-        res = (int *) threadReturn;
-        if(res[0] == 1){
-            return 1;
+	//printf("DEBUG: at thread return val\n");
+	//printf("DEBUG: ptr: %x\n", (int*)threadReturn);
+        res = *(int *) threadReturn;
+	//printf("DEBUG: Passed thread ret\n");
+        if(res != 255){
+	    //printf("Target found!\n");
+            index = ((i*groupSize) + res);
         }
     }
-
-    return EXIT_SUCCESS;
+    //if (index == -1)
+    //	printf("Target not found!\n");
+    //else
+	//printf("Target found!\n");
+    return index;
 }
