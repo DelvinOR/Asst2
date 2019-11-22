@@ -7,31 +7,31 @@
 
 
 int A(int* array){
-	return Search(array, 10000, 923, 250);
+	return Search(array, 10000, 9230, 10);
 }
 
 int B(int* array){
-	return Search(array, 10000, 923, 100);
+	return Search(array, 10000, 9230, 20);
 }
 
 int C(int* array){
-	return Search(array, 10000, 923, 50);
+	return Search(array, 10000, 9230, 50);
 }
 
 int D(int* array){
-	return Search(array, 10000, 923, 20);
+	return Search(array, 10000, 9230, 100);
 }
 
 int E(int* array){
-	return Search(array, 10000, 923, 10);
+	return Search(array, 10000, 9230, 250);
 }
 
 int F(int* array){
-	return Search(array, 1000, 923, 250);
+	return Search(array, 1000, 923, 10);
 }
 
 int G(int* array){
-	return Search(array, 1000, 923, 100);
+	return Search(array, 1000, 923, 20);
 }
 
 int H(int* array){
@@ -39,27 +39,27 @@ int H(int* array){
 }
 
 int I(int* array){
-	return Search(array, 1000, 923, 20);
+	return Search(array, 1000, 923, 100);
 }
 
 int J(int* array){
-	return Search(array, 1000, 923, 10);
+	return Search(array, 1000, 923, 250);
 }
 
 int K(int* array){
-	return Search(array, 100, 923, 100);
+	return Search(array, 100, 92, 10);
 }
 
 int L(int* array){
-	return Search(array, 100, 923, 50);
+	return Search(array, 100, 92, 20);
 }
 
 int M(int* array){
-	return Search(array, 100, 923, 20);
+	return Search(array, 100, 92, 50);
 }
 
 int N(int* array){
-	return Search(array, 100, 923, 10);
+	return Search(array, 100, 92, 100);
 }
 
 int main(int argc, char**argv){
@@ -67,7 +67,7 @@ int main(int argc, char**argv){
 
 
 	int arrSize = 10000;
-    int* myList = (int*)malloc(sizeof(int) * arrSize);
+	int* myList = (int*)malloc(sizeof(int) * arrSize);
    	int i;
    	 //printf("DEBUG: Filling array\n");
     for(i = 0; i < arrSize; i++){
@@ -79,7 +79,7 @@ int main(int argc, char**argv){
     int index2 = 0;
     for(i = 0; i < arrSize; i++){
        	index1 = rand()%arrSize;
-		index2 = rand()%arrSize;
+	index2 = rand()%arrSize;
         int temp = myList[index1];
         myList[index1] = myList[index2];
         myList[index2] = temp;
@@ -90,7 +90,7 @@ int main(int argc, char**argv){
     struct timeval start, end;
     long times[10000];
 	int asz[14] = {10000, 10000, 10000, 10000, 10000, 1000, 1000, 1000, 1000, 1000, 100, 100, 100, 100};
-	int gsz[14] = {250, 100, 50, 20, 10, 250, 100, 50, 20, 10, 100, 50, 20, 10};
+	int gsz[14] = {10, 20, 50, 100, 250, 10, 20, 50, 100, 250, 10, 20, 50, 100};
 	int (*fp[])(int *) = {A, B, C, D, E, F, G, H, I, J, K, L, M, N};
 	int T = 0;
     for(T = 0; T < 14; T++){
@@ -117,7 +117,7 @@ int main(int argc, char**argv){
     	}
 
 		
-		char c = 65;
+	char c = 65;
     	printf("Beginning Test %c: Array Size: %d Group Size: %d [x1000]\n", c+T, asz[T], gsz[T]);
     	int j = 0;
    		for(j = 0; j < 1000; j++){
@@ -131,7 +131,7 @@ int main(int argc, char**argv){
 			long elapsedtimeu = end.tv_usec - start.tv_usec;
       		long elapsedtimes = end.tv_sec - start.tv_sec;
       		long total = elapsedtimeu + elapsedtimes*1000000;
-			if (total < 0)
+			//if (total < 0)
 				//printf("DEBUG:neg val! u:%ld s:%ld\n", elapsedtimeu, elapsedtimes);
 			times[j] = total;
 			int temp = myList[index2];
@@ -161,9 +161,10 @@ int main(int argc, char**argv){
 			stdD += stdDev[j];
 		}
 		stdD = sqrt(stdD/1000);
-    	printf("Times(usec): Total: %lld Avg: %ld StdDev: %f Min: %ld Max: %ld\n", total, avg, stdD, min, max);
+    		printf("Times(usec): Total: %lld Avg: %ld StdDev: %f Min: %ld Max: %ld\n", total, avg, stdD, min, max);
+		//printf("%lld | %ld | %f | %ld | %ld\n", total, avg, stdD, min, max);
 	}
 
-
+	printf("DONE!\n");
     return 1;
 }
